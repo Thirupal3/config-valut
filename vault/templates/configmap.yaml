@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ include "vault.name" . }}
+    environment: {{ .Values.environment_name }}
+    costCenter: {{ include "vault.name" . }}
+data:
+  config.js: |
+    const CONFIG = {{ toJson .Values.config.env | indent 4 }}
